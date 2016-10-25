@@ -11,7 +11,7 @@ class NotesList extends Component {
       return (
         <article key={index}>
           <p>{note.text}</p>
-          <footer>Created by <strong>{note.created_by}</strong> at <em>{note.created_at}</em></footer>
+          <footer>Created by <strong>{note.createdBy}</strong> at <em>{note.createdAt}</em></footer>
         </article>
       )
     })

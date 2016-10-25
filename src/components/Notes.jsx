@@ -17,8 +17,11 @@ class Notes extends Component {
   }
 
   componentWillMount() {
+    const storedStringifiedData = localStorage.getItem('clientsNotes')
+    const storedData = storedStringifiedData ? JSON.parse(storedStringifiedData) : []
+    // console.log("storedData", storedData)
     this.setState({
-      clients: sampleData.clients
+      clients: storedData.length > 0 ? storedData : sampleData.clients
     })
   }
 
@@ -61,6 +64,7 @@ class Notes extends Component {
               <h2>Notes</h2>
               {!activeClient.id && <p>Pick a client to see or add notes.</p>}
               {activeClient.id && <NoteForm client={activeClient} handleSubmit={this.addNewNote.bind(this)} />}
+              {activeClient.id && <h2>Previous notes</h2>}
               {activeClient.id && <NotesList notes={activeClient.notes || []} />}
             </div>
           </div>
