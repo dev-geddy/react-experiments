@@ -1,0 +1,52 @@
+{
+  "clients": [
+    {
+      "id": 97354,
+      "name": "Honda Motors",
+      "notes": [
+        {
+          "createdAt": "",
+          "createdBy": "Gediminas",
+          "note": "Power of Dreams. Have you checked NSX?"
+        },
+        {
+          "createdAt": "",
+          "createdBy": "Gediminas",
+          "text": "Contacted marketing team."
+        }
+      ]
+    },
+    {
+      "id": 97353,
+      "name": "Porsche Motors",
+      "notes": [
+        {
+          "createdAt": "",
+          "createdBy": "Gediminas",
+          "text": "Modern classics"
+        },
+        {
+          "createdAt": "",
+          "createdBy": "Gediminas",
+          "text": "Timeless traditions, design, performance and quality."
+        }
+      ]
+    },
+    {
+      "id": 97352,
+      "name": "Mercedes",
+      "notes": [
+        {
+          "createdAt": "",
+          "createdBy": "Gediminas",
+          "note": "It's said that Mercedes even in Africa is Mercedes."
+        },
+        {
+          "createdAt": "",
+          "createdBy": "Gediminas",
+          "note": "Definitely worth attention."
+        }
+      ]
+    }
+  ]
+}
