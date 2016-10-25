@@ -50,7 +50,9 @@ class Notes extends Component {
   }
 
   addNewNote(newNote) {
-    console.log("new note:", newNote)
+    console.log("New note:", newNote)
+    // instead of picking up from state, clients list could be taken from local storage, in case of additions via other tabs.
+
     const appendToIndex = _findIndex(this.state.clients, (client) => {
       return client.id === newNote.clientId
     })

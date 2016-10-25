@@ -31,12 +31,11 @@ class NoteForm extends Component {
   }
 
   render() {
-    console.log("Note form...")
     return (
       <form className="note-add-form">
         <fieldset>
           <label>Note creator:</label>
-          <input type="text" ref="createdBy" id="field_createdBy" />
+          <input type="text" ref="createdBy" id="field_createdBy" placeholder="Normally it would be not editable" />
         </fieldset>
         <fieldset>
           <label>Note:</label>
