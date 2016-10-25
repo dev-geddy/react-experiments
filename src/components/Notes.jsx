@@ -81,11 +81,11 @@ class Notes extends Component {
         </header>
         <div className="page-content contains-columns">
           <div className="row">
-            <div className="column large-4">
+            <div className="column large-4 medium-6 small-12">
               <h2>Clients</h2>
               <ClientsList clients={clients} onClientSelect={this.onClientSelect.bind(this)} activeClient={activeClient} />
             </div>
-            <div className="column large-8">
+            <div className="column large-8 medium-6 small-12">
               <h2>{activeClient.name} Notes</h2>
               {!activeClient.id && <p>Pick a client to see or add notes.</p>}
               {activeClient.id && <NoteForm client={activeClient} handleSubmit={this.addNewNote.bind(this)} />}
