@@ -9,19 +9,21 @@ class NoteForm extends Component {
   }
 
   resetForm() {
-    this.refs.note = ''
-    this.refs.createdBy = ''
+    this.refs.note.value = ''
+    this.refs.createdBy.value = ''
   }
 
   onSubmit(event) {
     event.preventDefault()
     if (this.refs.note.value && this.refs.createdBy.value) {
-      const currentTime = moment().format('LLLL')
+      const currentTime = moment().format('LLLL') // quickly get nice date/time display from moment.js library
       const newNote = {
         clientId: this.props.client.id,
-        createdBy: this.refs.createdBy.value,
-        createdAt: currentTime,
-        note: this.refs.note.value
+        noteData: {
+          createdBy: this.refs.createdBy.value,
+          createdAt: currentTime,
+          text: this.refs.note.value
+        }
       }
       this.props.handleSubmit(newNote)
       this.resetForm()
@@ -41,7 +43,7 @@ class NoteForm extends Component {
           <textarea ref="note" id="field_note" />
         </fieldset>
         <fieldset>
-          <button onClick={this.onSubmit.bind(this)}>Add note!</button>
+          <button className="add-button" onClick={this.onSubmit.bind(this)}>Add note!</button>
         </fieldset>
       </form>
     )

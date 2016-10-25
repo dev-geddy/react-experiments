@@ -4,6 +4,7 @@ import ClientsList from './ClientNotes/ClientsList'
 import NotesList from './ClientNotes/NotesList'
 import NoteForm from './ClientNotes/NoteForm'
 import './ClientNotes/ClientNotes.scss'
+import _findIndex from 'lodash/findIndex'
 
 class Notes extends Component {
 
@@ -16,12 +17,25 @@ class Notes extends Component {
     }
   }
 
+  hasStoredData() {
+    return localStorage.getItem('clientsNotes') ? true : false
+  }
+
+  getStoredData() {
+    return JSON.parse(localStorage.getItem('clientsNotes'))
+  }
+
+  getSampleData() {
+    return sampleData.clients
+  }
+
+  storeNewData(newData) {
+    localStorage.setItem('clientsNotes', JSON.stringify(newData))
+  }
+
   componentWillMount() {
-    const storedStringifiedData = localStorage.getItem('clientsNotes')
-    const storedData = storedStringifiedData ? JSON.parse(storedStringifiedData) : []
-    // console.log("storedData", storedData)
     this.setState({
-      clients: storedData.length > 0 ? storedData : sampleData.clients
+      clients: this.hasStoredData() ? this.getStoredData() : this.getSampleData()
     })
   }
 
@@ -37,6 +51,15 @@ class Notes extends Component {
 
   addNewNote(newNote) {
     console.log("new note:", newNote)
+    const appendToIndex = _findIndex(this.state.clients, (client) => {
+      return client.id === newNote.clientId
+    })
+
+    let newState = {...this.state} // do not mutate original state.
+    newState.clients[appendToIndex].notes.push(newNote.noteData)
+
+    this.setState(newState)
+    this.storeNewData(newState.clients) // save to local storage, to be available after refresh
   }
 
   render() {
@@ -61,7 +84,7 @@ class Notes extends Component {
               <ClientsList clients={clients} onClientSelect={this.onClientSelect.bind(this)} activeClient={activeClient} />
             </div>
             <div className="column large-8">
-              <h2>Notes</h2>
+              <h2>{activeClient.name} Notes</h2>
               {!activeClient.id && <p>Pick a client to see or add notes.</p>}
               {activeClient.id && <NoteForm client={activeClient} handleSubmit={this.addNewNote.bind(this)} />}
               {activeClient.id && <h2>Previous notes</h2>}

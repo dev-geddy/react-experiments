@@ -2,15 +2,15 @@
   "clients": [
     {
       "id": 97354,
-      "name": "Honda Motors",
+      "name": "Honda Motor Co., Ltd.",
       "notes": [
         {
-          "createdAt": "",
+          "createdAt": "Tuesday, October 25, 2016 9:47 PM",
           "createdBy": "Gediminas",
           "note": "Power of Dreams. Have you checked NSX?"
         },
         {
-          "createdAt": "",
+          "createdAt": "Tuesday, October 25, 2016 9:48 PM",
           "createdBy": "Gediminas",
           "text": "Contacted marketing team."
         }
@@ -18,15 +18,15 @@
     },
     {
       "id": 97353,
-      "name": "Porsche Motors",
+      "name": "Dr. Ing. h.c. F. Porsche AG",
       "notes": [
         {
-          "createdAt": "",
+          "createdAt": "Tuesday, October 25, 2016 9:53 PM",
           "createdBy": "Gediminas",
           "text": "Modern classics"
         },
         {
-          "createdAt": "",
+          "createdAt": "Tuesday, October 25, 2016 9:54 PM",
           "createdBy": "Gediminas",
           "text": "Timeless traditions, design, performance and quality."
         }
@@ -34,15 +34,15 @@
     },
     {
       "id": 97352,
-      "name": "Mercedes",
+      "name": "Mercedes-Benz / Daimler AG",
       "notes": [
         {
-          "createdAt": "",
+          "createdAt": "Tuesday, October 25, 2016 9:57 PM",
           "createdBy": "Gediminas",
           "note": "It's said that Mercedes even in Africa is Mercedes."
         },
         {
-          "createdAt": "",
+          "createdAt": "Tuesday, October 25, 2016 9:58 PM",
           "createdBy": "Gediminas",
           "note": "Definitely worth attention."
         }

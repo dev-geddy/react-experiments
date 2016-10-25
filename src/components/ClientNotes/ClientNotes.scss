@@ -22,3 +22,29 @@
     }
   }
 }
+
+.notes-list {
+  .notes-list__note {
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    p {
+      margin: 0;
+      padding: 10px;
+    }
+    footer {
+      padding: 10px;
+      font-size: 12px;
+      background-color: #f5f5f5;
+    }
+  }
+}
+
+.note-add-form {
+  margin-bottom: 45px;
+}
+
+.add-button {
+  background-color: $color-g86-button-blue;
+  color: $color-the-white;
+  padding: 8px 25px;
+}
