@@ -32,7 +32,7 @@ module.exports = {
   appIndexJs: resolveApp('src/index.jsx'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
-  testsSetup: resolveApp('src/setupTests.js'),
+  testsSetup: resolveApp('src/setupTests.jsx'),
   appNodeModules: resolveApp('node_modules'),
   ownNodeModules: resolveApp('node_modules'),
   nodePaths: nodePaths
