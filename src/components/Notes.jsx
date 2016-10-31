@@ -3,10 +3,10 @@ import sampleData from '../sample-data/clients.json'
 import ClientsList from './ClientNotes/ClientsList'
 import NotesList from './ClientNotes/NotesList'
 import NoteForm from './ClientNotes/NoteForm'
-import './ClientNotes/ClientNotes.scss'
+// import './ClientNotes/ClientNotes.scss'
 import _findIndex from 'lodash/findIndex'
 
-class Notes extends Component {
+export class Notes extends Component {
 
   constructor(props) {
     super(props)
@@ -50,7 +50,7 @@ class Notes extends Component {
   }
 
   addNewNote(newNote) {
-    console.log("New note:", newNote)
+    // console.log("New note:", newNote)
     // instead of picking up from state, clients list could be taken from local storage, in case of additions via other tabs.
 
     const appendToIndex = _findIndex(this.state.clients, (client) => {
@@ -70,8 +70,8 @@ class Notes extends Component {
       activeClient
     } = this.state
 
-    console.log("Clients: ", clients)
-    console.log("Active Client: ", activeClient)
+    // console.log("Clients: ", clients)
+    // console.log("Active Client: ", activeClient)
 
     return (
       <article className="page">
