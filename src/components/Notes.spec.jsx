@@ -5,7 +5,8 @@ import sampleData from '../sample-data/clients.json'
 import sinon from 'sinon'
 // jest.dontMock('./ClientNotes/ClientNotes.scss')
 
-// mock local storage for jest...
+// will have to be moved to be available globally for all tests
+// mock local storage within the test
 let store = {
   clientsNotes: JSON.stringify(sampleData.clients)
 }
@@ -50,27 +51,27 @@ describe('Notes component', () => {
     sinon.spy(Notes.prototype, 'onClientSelect');
     const notesComponent = shallow(<Notes />)
 
-
     expect(notesComponent.find('ClientsList').shallow().find(".clients-list article").first().length).toEqual(1)
     notesComponent.find('ClientsList').shallow().find(".clients-list article").first().simulate("click", eventMock)
 
-    expect(Notes.prototype.onClientSelect.calledOnce).toEqual(true);
-
-    // expect(notesComponent.find('NoteForm').length).toEqual(1)
-    // expect(notesComponent.find('NotesList').length).toEqual(1)
-  })
-
-  it('Clients list selection should reveal form and notes', () => {
-
-    const notesComponent = shallow(<Notes />)
-    // Notes.prototype.setState({activeClient: sampleData.clients[0]})
-
-    expect(notesComponent.find('ClientsList').shallow().find(".clients-list article").first().length).toEqual(1)
-    notesComponent.find('ClientsList').shallow().find(".clients-list article").first().simulate("click", eventMock)
-
+    expect(Notes.prototype.onClientSelect.calledOnce).toEqual(true)
+    notesComponent.update()
     expect(notesComponent.find('NoteForm').length).toEqual(1)
     expect(notesComponent.find('NotesList').length).toEqual(1)
   })
+})
 
-
+describe('Active client in state should affect view accordingly', () => {
+  it('Clients list selection should reveal form and notes', () => {
+    const notesComponent = shallow(<Notes />)
+    notesComponent.setState({activeClient: sampleData.clients[0]})
+    expect(notesComponent.find('NoteForm').length).toEqual(1)
+    expect(notesComponent.find('NoteForm').shallow().find("input").length).toEqual(1)
+    expect(notesComponent.find('NoteForm').shallow().find("textarea").length).toEqual(1)
+    expect(notesComponent.find('NoteForm').shallow().find("button").length).toEqual(1)
+    expect(notesComponent.find('NotesList').length).toEqual(1)
+    expect(notesComponent.find('NotesList').shallow().find("article").length).toEqual(2)
+    expect(notesComponent.find('NotesList').shallow().find("article").first().find("footer strong").text()).toEqual("Gediminas")
+    expect(notesComponent.find('NotesList').shallow().find("article").at(1).find("p").text()).toEqual("Contacted marketing team.")
+  })
 })
