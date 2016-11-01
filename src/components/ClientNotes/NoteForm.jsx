@@ -16,6 +16,7 @@ class NoteForm extends Component {
   onSubmit(event) {
     event.preventDefault()
     if (this.refs.note.value && this.refs.createdBy.value) {
+
       const currentTime = moment().format('LLLL') // quickly get nice date/time display from moment.js library
       const newNote = {
         clientId: this.props.client.id,
