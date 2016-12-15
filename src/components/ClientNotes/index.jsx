@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import sampleData from '../sample-data/clients.json'
-import ClientsList from './ClientNotes/ClientsList'
-import NotesList from './ClientNotes/NotesList'
-import NoteForm from './ClientNotes/NoteForm'
+import sampleData from '../../sample-data/clients.json'
+import ClientsList from './ClientsList'
+import NotesList from './NotesList'
+import NoteForm from './NoteForm'
 // import './ClientNotes/ClientNotes.scss'
 import _findIndex from 'lodash/findIndex'
 
@@ -68,7 +68,7 @@ export class Notes extends Component {
     const {
       clients,
       activeClient
-    } = this.state
+      } = this.state
 
     // console.log("Clients: ", clients)
     // console.log("Active Client: ", activeClient)

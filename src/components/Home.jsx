@@ -1,16 +1,16 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
-class Home extends Component {
 
+class Home extends Component {
   render() {
     return (
       <article className="page">
         <header>
           <h2>Experiments application</h2>
-          <p>Application features details</p>
+          <p>Intro to application features</p>
         </header>
         <section className="page-content">
-          <h3>Notes component</h3>
+          <h3>Notes</h3>
           <p><Link to="/notes">Notes</Link> component is built to manage client notes and store them on browser local storage.</p>
           <p>Expected functionality:</p>
           <ul>
@@ -21,7 +21,19 @@ class Home extends Component {
             <li>Notes can not be added if "Note creator" or "Note" is missing</li>
             <li>No error handling has been implemented</li>
           </ul>
-          <h3>Locations component</h3>
+          <hr />
+          <h3>Favourite tunes</h3>
+          <p><Link to="/tunes">Favourite tunes</Link> component objectives are to search iTunes store and build the list of your own Favourites.</p>
+          <p>Expected section functionality:</p>
+          <ul>
+            <li>Search iTunes store</li>
+            <li>Search results should be limited by max 10 records</li>
+            <li>Build your Favourites list by picking songs from iTunes search results</li>
+            <li>Call to iTunes is not expected to work for now.</li>
+            <li>Single collection of results, based on mocked data.</li>
+          </ul>
+          <hr />
+          <h3>Locations</h3>
           <p><Link to="/locations">Locations</Link> component is built to manage client notes and store them on browser local storage.</p>
           <p>Expected functionality:</p>
           <ul>

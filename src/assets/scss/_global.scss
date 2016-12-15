@@ -36,3 +36,8 @@ button {
   font-size: 36px;
   font-family: 'Mr De Haviland', cursive;
 }
+
+hr {
+  border: none;
+  border-top: 1px solid $color-menu-border-grey;
+}

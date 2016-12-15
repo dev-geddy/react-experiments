@@ -7,7 +7,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 // views components
 import App from './App'
 import Home from './components/Home'
-import Notes from './components/Notes'
+import Notes from './components/ClientNotes'
 import Tunes from './components/FavouriteTunes'
 import Locations from './components/TravelViaLocations'
 import NotFound from './components/NotFound'

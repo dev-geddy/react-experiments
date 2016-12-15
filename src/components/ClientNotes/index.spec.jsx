@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow, mount, render } from 'enzyme'
-import Notes, {Notes as NotesInstance} from './Notes'
-import sampleData from '../sample-data/clients.json'
+import Notes, {Notes as NotesInstance} from './index.jsx'
+import sampleData from '../../sample-data/clients.json'
 import sinon from 'sinon'
 // jest.dontMock('./ClientNotes/ClientNotes.scss')
 
