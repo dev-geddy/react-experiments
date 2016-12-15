@@ -1,0 +1,35 @@
+@import '../SDK/SDK-globals';
+
+.tunes-list {
+  .tunes-list__tune {
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    position: relative;
+    img {
+      width: 50px;
+      height: auto;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    p {
+      margin: 0;
+      padding: 10px 10px 10px 65px;
+      > a {
+        position: relative;
+        padding-left: 20px;
+        > i {
+          font-size: 15px;
+          position: absolute;
+          left: 0;
+          top: 3px;
+        }
+      }
+    }
+    footer {
+      padding: 10px;
+      font-size: 12px;
+      background-color: #f5f5f5;
+    }
+  }
+}

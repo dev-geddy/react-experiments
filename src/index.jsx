@@ -8,6 +8,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import App from './App'
 import Home from './components/Home'
 import Notes from './components/Notes'
+import Tunes from './components/FavouriteTunes'
 import Locations from './components/TravelViaLocations'
 import NotFound from './components/NotFound'
 
@@ -26,6 +27,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="notes" component={Notes} />
+        <Route path="tunes" component={Tunes} />
         <Route path="locations" component={Locations} />
         <Route path="*" component={NotFound} />
       </Route>
