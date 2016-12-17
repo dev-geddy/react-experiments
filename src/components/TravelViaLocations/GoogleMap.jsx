@@ -24,7 +24,7 @@ export class GoogleMapComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      origin: this.createLatLngFromCoordinates(52.927842, -4.133384),
+      origin: this.createLatLngFromCoordinates(52.927842, -4.133384), // initial location
       destination: null,
       directions: null
     }

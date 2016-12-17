@@ -7,7 +7,8 @@ export class TunesList extends Component {
     selectedTune: React.PropTypes.object,
     onSelect: React.PropTypes.func,
     buttonCaption: React.PropTypes.string,
-    buttonIcon: React.PropTypes.string
+    buttonIcon: React.PropTypes.string,
+    favouritedUniqueIds: React.PropTypes.array
   }
 
   onTuneSelect(index, e) {
@@ -17,50 +18,77 @@ export class TunesList extends Component {
 
   renderTune(tune, index) {
     tune = this.formatTune(tune)
+    let isFavourited = false
+    let { favouritedUniqueIds } = this.props
+    if (favouritedUniqueIds && favouritedUniqueIds.length > 0) {
+      isFavourited = (favouritedUniqueIds.indexOf(tune.uniqueId) === -1) ? false : true
+    }
+
     return (
       <article key={tune.uniqueId} className="tunes-list__tune">
-        {tune.thumbnail && <img src={tune.thumbnail} alt={tune.recordName} />}
-        <p>{tune.itemType}: {tune.authorName} - {tune.recordName}<br />
-          <a href="#" onClick={this.onTuneSelect.bind(this, index)}>
-            <i className="material-icons">{this.props.buttonIcon}</i> {this.props.buttonCaption}
-          </a>
-        </p>
-        <footer><strong>{tune.genereName}</strong> <em>{tune.released}</em></footer>
+        <div className="row collapse">
+          <div className="column tune-thumbnail">
+            {tune.thumbnail ? <img src={tune.thumbnail} alt={tune.recordName} /> : <div className="no-img-placeholder"></div>}
+          </div>
+          <div className="column tune-description">
+            <p>{tune.authorName} - {tune.recordName}<br />
+              {!isFavourited ?
+                <a href="#" className="fav-button" onClick={this.onTuneSelect.bind(this, index)}>
+                  <i className="material-icons">{this.props.buttonIcon}</i> {this.props.buttonCaption}
+                </a> : <span className="fav-button fav-already"><i className="material-icons">{this.props.buttonIcon}</i> Already in the list</span>
+              }
+
+            </p>
+          </div>
+        </div>
+        <footer><strong>{tune.genereName}</strong>: <em>{tune.itemType}</em></footer>
       </article>
     )
   }
 
   formatTune(tune) {
-    let tuneTypes = {
-      track: {
-        uniqueId: tune.wrapperType + tune.trackId,
-        thumbnail: tune.artworkUrl100,
-        itemType: tune.kind,
-        genereName: tune.primaryGenreName,
-        authorName: tune.artistName,
-        recordName: tune.trackName,
-        released: tune.releaseDate
-      },
-      collection: {
-        uniqueId: tune.wrapperType + tune.collectionId,
-        thumbnail: tune.artworkUrl100,
-        itemType: tune.collectionType,
-        genereName: tune.primaryGenreName,
-        authorName: tune.artistName,
-        recordName: tune.collectionName,
-        released: tune.releaseDate
-      },
-      artist: {
-        uniqueId: tune.wrapperType + tune.artistId,
-        thumbnail: '',
-        itemType: tune.artistType,
-        genereName: tune.primaryGenreName,
-        authorName: tune.artistName,
-        recordName: tune.primaryGenreName,
-        released: ''
-      }
+    switch (tune.wrapperType) {
+      case "track":
+        return {
+          uniqueId: tune.wrapperType + tune.trackId,
+          thumbnail: tune.artworkUrl100,
+          itemType: tune.kind,
+          genereName: tune.primaryGenreName,
+          authorName: tune.artistName,
+          recordName: tune.trackName,
+          released: tune.releaseDate
+        }
+      case "collection":
+        return {
+          uniqueId: tune.wrapperType + tune.collectionId,
+          thumbnail: tune.artworkUrl100,
+          itemType: tune.collectionType,
+          genereName: tune.primaryGenreName,
+          authorName: tune.artistName,
+          recordName: tune.collectionName,
+          released: tune.releaseDate
+        }
+      case "artist":
+        return {
+          uniqueId: tune.wrapperType + tune.artistId,
+          thumbnail: '',
+          itemType: tune.artistType,
+          genereName: tune.primaryGenreName,
+          authorName: tune.artistName,
+          recordName: tune.primaryGenreName,
+          released: ''
+        }
+      default:
+        return {
+          uniqueId: '',
+          thumbnail: '',
+          itemType: '',
+          genereName: '',
+          authorName: '',
+          recordName: 'Unsupported wrapper type: ' + tune.wrapperType,
+          released: ''
+        }
     }
-    return tuneTypes[tune.wrapperType]
   }
 
   renderTunes(tunes) {

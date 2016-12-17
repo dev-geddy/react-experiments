@@ -5,10 +5,11 @@ import tunesStub from '../../sample-data/tunes.json'
 // https://itunes.apple.com/search?term=jean+michel+jarre&entity=musicTrack,musicArtist,song,mix&limit=10
 import TunesList from './TunesList'
 import TunesSearch from './TunesSearch'
-import Request from '../../helpers/Request'
+// import Request from '../../helpers/Request'
 import _findIndex from 'lodash/findIndex'
 
 export class FavouriteTunes extends Component {
+  static pageTitle = 'Favourite tunes'
 
   constructor(props) {
     super(props)
@@ -16,8 +17,10 @@ export class FavouriteTunes extends Component {
     this.state = {
       selectedTune: {},
       favourites: [],
-      tunes: []
+      tunes: [],
+      error: ''
     }
+
   }
 
   componentWillMount() {
@@ -25,13 +28,6 @@ export class FavouriteTunes extends Component {
       tunes: tunesStub.results,
       favourites: this.getStoredFavourites()
     })
-  }
-
-  componentDidMount() {
-    const newTitle = 'iTunes search and favourite'
-    if (document.title !== newTitle) {
-      document.title = newTitle;
-    }
   }
 
   hasStoredData() {
@@ -54,7 +50,6 @@ export class FavouriteTunes extends Component {
   }
 
   isTuneInFavourites(tune) {
-    console.log(tune)
     const searchResult = _findIndex(this.state.favourites, (favourite) => {
       // according to item types we query
       let uniqueId = tune.wrapperType + (tune.trackId || tune.collectionId || tune.artistId)
@@ -82,53 +77,80 @@ export class FavouriteTunes extends Component {
   }
 
   queryItunesStore(term) {
-    Request.callEndpoint({
+    // don't do any calls.
+    this.setState({error: 'If the real direct call to API would happen, it would return: No "Access-Control-Allow-Origin" header is present on the requested resource.'})
+    /*Request.callEndpoint({
       method: 'GET',
       url: 'https://itunes.apple.com/search?term=' + term + 'e&entity=musicTrack,musicArtist,song,mix&limit=10'
     }).then((res)=> {
       console.log("iTunes response: ", res)
       this.handleSearchResult(res, term)
+    }, (e) => {
+      this.setState({error: e.message + '. Most likely: No "Access-Control-Allow-Origin" header is present on the requested resource.'})
     }).catch((e) => {
-      throw e
-    })
+      this.setState({error: e.message})
+    })*/
   }
 
   handleSearchResult(res, term) {
     this.setState({
       tunes: res.results
     })
-    /*if (term === this.refs.searchInput.value) {
+  }
 
-    }*/
+  buildArrayOfUniqueIds(favourites) {
+    return favourites.reduce((previousUniqueIds, favourite) => {
+      previousUniqueIds.push(this.formatTuneId(favourite))
+      return previousUniqueIds
+    }, [])
+  }
+
+  formatTuneId(tune) {
+    switch (tune.wrapperType) {
+      case "track":
+        return (tune.wrapperType + tune.trackId)
+      case "collection":
+        return (tune.wrapperType + tune.collectionId)
+      case "artist":
+        return (tune.wrapperType + tune.artistId)
+      default:
+        return 'Unsupported wrapper: ' + tune.wrapperType
+    }
   }
 
   render() {
     const {
       tunes,
       favourites,
-      selectedTune
+      selectedTune,
+      error
       } = this.state
+
+    const favouritedUniqueIds = this.buildArrayOfUniqueIds(favourites)
 
     return (
       <article className="page">
         <header>
-          <h2>Build my Favourites</h2>
-          <p>Search iTune store and pick your favourites!</p>
+          <h2>{FavouriteTunes.pageTitle}</h2>
+          <p>Search iTune store and pick your favourites! <strong>Based on mocked response.</strong></p>
         </header>
         <div className="page-content contains-columns">
           <div className="row">
             <div className="column large-6 medium-6 small-12">
-              <h2>iTunes search</h2>
-              <TunesSearch onSubmit={this.queryItunesStore.bind(this)} />
+              <h3>iTunes search</h3>
+              <TunesSearch onSearch={this.queryItunesStore.bind(this)}
+                           error={error}
+              />
               <TunesList tunes={tunes}
                          onSelect={this.onTuneSelect.bind(this)}
                          selectedTune={selectedTune}
-                         buttonCaption="Add to Favourites"
+                         favouritedUniqueIds={favouritedUniqueIds}
+                         buttonCaption="Favourite"
                          buttonIcon="star"
               />
             </div>
             <div className="column large-6 medium-6 small-12">
-              <h2>My Favourites</h2>
+              <h3>My Favourites</h3>
               <TunesList tunes={favourites}
                          onSelect={this.onTuneDelete.bind(this)}
                          selectedTune={selectedTune}

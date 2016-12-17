@@ -21,15 +21,28 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.routerReducer
 })
 
+const pageTitleSuffix = ' | G86'
+const pageTitles = {
+  '/': 'React Experiments',
+  '/notes': Notes.pageTitle,
+  '/tunes': Tunes.pageTitle,
+  '/locations': Locations.pageTitle
+}
+
+browserHistory.listen((location) => {
+  const newTitle = pageTitles[location.pathname] || 'Not found...'
+  document.title = newTitle + pageTitleSuffix
+})
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Home} />
-        <Route path="notes" component={Notes} />
-        <Route path="tunes" component={Tunes} />
-        <Route path="locations" component={Locations} />
-        <Route path="*" component={NotFound} />
+        <IndexRoute component={Home}/>
+        <Route path="notes" component={Notes}/>
+        <Route path="tunes" component={Tunes}/>
+        <Route path="locations" component={Locations}/>
+        <Route path="*" component={NotFound}/>
       </Route>
     </Router>
   </Provider>,
