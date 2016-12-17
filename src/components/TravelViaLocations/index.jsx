@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import GoogleMap from './GoogleMap'
 
 export class TravelViaLocations extends Component {
-
+  static pageTitle = 'Travel via Location'
   static PropTypes = {
     searchResults: React.PropTypes.array,
     isLoading: React.PropTypes.bool,
@@ -84,7 +84,7 @@ export class TravelViaLocations extends Component {
     return (
       <article className="page">
         <header>
-          <h2>Travel via location</h2>
+          <h2>{TravelViaLocations.pageTitle}</h2>
           <p>Up to 4 locations to plan a journey</p>
         </header>
         <div className="page-content contains-columns">

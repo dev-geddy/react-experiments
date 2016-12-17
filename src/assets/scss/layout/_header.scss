@@ -19,8 +19,18 @@
 
   i {
     position: absolute;
-    top: 2px;
+    top: 3px;
     left: 2px;
+    transition-duration: 0.25s;
+    transition-property: font-size, left, top;
+    font-size: 24px;
+    &.animate {
+      top: 1px;
+      left: 0;
+      font-size: 28px;
+      transition-duration: 0.25s;
+      transition-property: font-size, left, top;
+    }
   }
   .great-title {
     font-size: 13px;

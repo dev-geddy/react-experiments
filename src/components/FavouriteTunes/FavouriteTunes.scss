@@ -1,0 +1,65 @@
+@import '../SDK/SDK-globals';
+
+.tunes-list {
+  .tunes-list__tune {
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    position: relative;
+    > .row {
+      margin: 0;
+      > .column {
+        padding: 5px;
+        &.tune-thumbnail {
+          max-width: 80px;
+        }
+        &.tune-description {
+          // width: auto;
+          flex-grow: 1;
+        }
+      }
+      > .tune-thumbnail {
+        > img {
+          width: 70px;
+          height: auto;
+          display: block;
+        }
+        > .no-img-placeholder {
+          width: 70px;
+          height: 70px;
+          background-color: $color-menu-border-grey;
+        }
+      }
+
+    }
+
+    p {
+      margin: 0;
+      > .fav-button {
+        position: relative;
+        padding-left: 20px;
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+        &.fav-already {
+          color: darken($color-g86-menu-highlight-green, 10);
+          text-decoration: none;
+          > i {
+            color: $color-g86-menu-highlight-green;
+          }
+        }
+        > i {
+          font-size: 15px;
+          position: absolute;
+          left: 0;
+          top: 3px;
+        }
+      }
+    }
+    footer {
+      font-size: 12px;
+      background-color: #f5f5f5;
+      padding: 5px;
+    }
+  }
+}
