@@ -101,7 +101,7 @@ export class TravelViaLocations extends Component {
               {searchResults.length > 0 && this.renderResults(searchResults)}
               <hr />
               <h3>Waypoints added</h3>
-              {waypoints ? this.renderWaypoints(waypoints) : 'No waypoints yet.'}
+              {waypoints.length > 0 ? this.renderWaypoints(waypoints) : 'No waypoints yet.'}
             </div>
             <div className="column large-8 medium-6 small-12">
 
